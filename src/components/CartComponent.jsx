@@ -8,7 +8,7 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import { ProductContext } from "./App";
 
 function CartComponent() {
-  const item = useContext(ProductContext);
+  const { item } = useContext(ProductContext);
 
   return (
     <>
