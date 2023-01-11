@@ -11,9 +11,7 @@ function Cart() {
   const [item, setItem] = useState([]);
 
   useEffect(() => {
-    Api()
-      .then((res) => setItem(res.data))
-      .catch((error) => console.log(error));
+    Api.then((res) => setItem(res.data)).catch((error) => console.log(error));
   }, []);
 
   return (

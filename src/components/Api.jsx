@@ -1,5 +1,3 @@
 import axios from "axios";
 
-export const Api = () => {
-  return axios.get("https://fakestoreapi.com/products/");
-};
+export const Api = axios.get("https://fakestoreapi.com/products/");

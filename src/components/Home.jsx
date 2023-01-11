@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
 import NavBar from "./Navbar";
+import { Api } from "./Api";
 
 function Home(props) {
+  const [item, setItem] = useState([]);
+
+  useEffect(() => {
+    Api.then((res) => setItem(res.data)).catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <NavBar />
@@ -14,7 +21,11 @@ function Home(props) {
           </h1>
         ) : null}
 
-        <Cards />
+        <div className="mt-5 row justify-content-center gap-5 mb-5">
+          {item.map((currentItem) => {
+            return <Cards key={currentItem.id} {...currentItem} />;
+          })}
+        </div>
       </div>
     </>
   );
