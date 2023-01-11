@@ -14,6 +14,17 @@
   background-color: #74c0fc !important;
 }
 
+.cart-icon-link {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 5px;
+  left: 12px;
+  color: azure;
+}
+
 /* Login Form */
 .login-form {
   display: flex;
@@ -49,7 +60,7 @@
 .cart-items {
   border-radius: 10px;
   box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.17);
-  height: 800px;
+  height: auto;
   background-color: #74c0fc;
 }
 

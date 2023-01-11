@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { auth } from "../../firebase";
+import Badge from "react-bootstrap/Badge";
+import { auth } from "../firebase";
 
 function AuthDetails(props) {
   const [authUser, setAuthUser] = useState(null);
@@ -32,8 +33,11 @@ function AuthDetails(props) {
     <>
       {authUser ? (
         <>
-          <Nav.Link href="/cart">
-            <i className="fa-solid fa-cart-shopping fa-lg"></i>
+          <Nav.Link href="/cart" className="cart-icon-link">
+            <i className="cart-icon fa-solid fa-cart-shopping fa-xl"></i>
+            <Badge className="cart-badge" bg="">
+              9
+            </Badge>
           </Nav.Link>
 
           <NavDropdown title={authUser.email} id="basic-nav-dropdown">
