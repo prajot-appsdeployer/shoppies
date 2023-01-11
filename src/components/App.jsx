@@ -1,18 +1,15 @@
 import "../App.css";
 import Login from "./auth/Login";
-import {
-  Routes,
-  Route,
-  redirect,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./Home";
 import SignUp from "./auth/SignUp";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import Cart from "./Cart";
+import { products } from "./products";
+
+export const ProductContext = createContext();
 
 function App() {
   const navigate = useNavigate();
@@ -38,7 +35,16 @@ function App() {
       <Routes>
         {loggedIn ? (
           <>
-            <Route path="/" element={<Home loggedIn={loggedIn} />} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <ProductContext.Provider value={products}>
+                    <Home loggedIn={loggedIn} />
+                  </ProductContext.Provider>
+                </>
+              }
+            />
             <Route path="/cart" element={<Cart />} />
           </>
         ) : (

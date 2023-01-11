@@ -18,8 +18,7 @@ function Cards({ image, title, price, rating, category }) {
 
         <ListGroup className="list-group m-2 mb-3">
           <Button variant="outline-primary mb-2 ">Add to wishlist</Button>
-          <Button variant="outline-primary mb-2 ">Add to cart</Button>
-          <Button variant="primary ">Buy Now</Button>
+          <Button variant="primary ">Add to cart</Button>
         </ListGroup>
 
         <Card.Footer className="text-muted">Category: {category}</Card.Footer>

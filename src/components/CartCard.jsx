@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
-function CardOfCart({ image, title, price, rating }) {
+function CartCard({ image, title, price, rating }) {
   return (
     <>
       <div className="card mb-3">
@@ -11,6 +11,7 @@ function CardOfCart({ image, title, price, rating }) {
             <img
               src={image}
               className="img-fluid rounded-start cart-card-img"
+              alt=""
             />
           </div>
           <div className="col-md-8">
@@ -45,4 +46,4 @@ function CardOfCart({ image, title, price, rating }) {
   );
 }
 
-export default CardOfCart;
+export default CartCard;

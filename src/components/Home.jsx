@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import Cards from "./Cards";
 import NavBar from "./Navbar";
-import { Api } from "./Api";
+import { ProductContext } from "./App";
 
 function Home(props) {
-  const [item, setItem] = useState([]);
-
-  useEffect(() => {
-    Api.then((res) => setItem(res.data)).catch((err) => console.log(err));
-  }, []);
-
+  const item = useContext(ProductContext);
   return (
     <>
       <NavBar />
