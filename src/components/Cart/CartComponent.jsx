@@ -16,10 +16,6 @@ function CartComponent() {
     return total + item.price * item.quantity;
   }, 0);
 
-  const totalItems = cartItems.reduce((total, item) => {
-    return (total = item.quantity + 1);
-  }, 0);
-
   if (cartItems.length === 0) {
     return (
       <>
@@ -83,8 +79,8 @@ function CartComponent() {
 
             <div className="d-flex mb-3 justify-content-between">
               <p className="mt-3 align-self-center">
-                Your cart have <span className="fw-bold">{totalItems}</span>{" "}
-                items.
+                Your cart have{" "}
+                <span className="fw-bold">{cartItems.length}</span> items.
               </p>
 
               <div className="mt-2 ">
