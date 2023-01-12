@@ -1,6 +1,8 @@
 import axios from "axios";
+// import { useEffect, useState } from "react";
 
-export const Api = axios.get("https://fakestoreapi.com/products/");
+const Api = axios.get("https://fakestoreapi.com/products/");
+// const [products, setProducts] = useState([]);
 // useEffect(() => {
-//   Api.then((res) => setItem(res.data)).catch((err) => console.log(err));
+//   Api.then((res) => setProducts(res.data));
 // }, []);

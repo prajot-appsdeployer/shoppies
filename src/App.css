@@ -20,9 +20,10 @@
 
 .cart-badge {
   position: absolute;
-  top: 5px;
+  top: 6px;
   left: 12px;
   color: azure;
+  font-size: 10px;
 }
 
 /* Login Form */

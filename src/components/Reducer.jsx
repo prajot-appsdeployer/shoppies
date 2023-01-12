@@ -3,7 +3,7 @@ export const reducer = (state, action) => {
     return {
       ...state,
       item: state.item.filter((product) => {
-        return product.id != action.payload;
+        return product.id !== action.payload;
       }),
     };
   }
@@ -41,6 +41,26 @@ export const reducer = (state, action) => {
       })
       .filter((product) => product.quantity !== 0);
     return { ...state, item: updatedCart };
+  }
+
+  if (action.type === "GET_TOTAL") {
+    let { totalItem, totalAmount } = state.item.reduce(
+      (accum, curVal) => {
+        let { price, quantity } = curVal;
+
+        accum.totalItem += quantity;
+
+        let updatedTotalAmount = price * quantity;
+        accum.totalAmount += updatedTotalAmount;
+
+        return accum;
+      },
+      {
+        totalItem: 0,
+        totalAmount: 0,
+      }
+    );
+    return { ...state, totalItem, totalAmount };
   }
 
   return state;

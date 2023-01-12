@@ -8,12 +8,13 @@ import FillCardDetails from "./FillCardDetails";
 import Button from "react-bootstrap/esm/Button";
 
 function CartComponent() {
-  const { item, clearCart } = useContext(ProductContext);
+  const { item, totalItem, totalAmount, clearCart } =
+    useContext(ProductContext);
 
   if (item.length === 0) {
     return (
       <>
-        <Navbar />
+        <Navbar totalItem={totalItem} />
 
         <div className="container mt-3 mb-5">
           <h5 className="mt-2">
@@ -29,12 +30,13 @@ function CartComponent() {
 
               <div className="d-flex mb-3 justify-content-between">
                 <p className="mt-3 align-self-center">
-                  Your cart have {0} items.
+                  Your cart have <span className="fw-bold"> </span> items.
                 </p>
 
                 <div className="mt-2 ">
                   <p>
-                    Cart value: <span className="fs-3"> $500</span>
+                    Cart value:{" "}
+                    <span className="fs-3"> ${totalAmount.toFixed(2)}</span>
                   </p>
 
                   <Button
@@ -63,7 +65,7 @@ function CartComponent() {
 
   return (
     <>
-      <Navbar />
+      <Navbar totalItem={totalItem} />
 
       <div className="container mt-4 mb-5">
         <h5 className="mt-2">
@@ -89,12 +91,14 @@ function CartComponent() {
 
             <div className="d-flex mb-3 justify-content-between">
               <p className="mt-3 align-self-center">
-                Your cart have {5} items.
+                Your cart have <span className="fw-bold"> {totalItem}</span>{" "}
+                items.
               </p>
 
               <div className="mt-2 ">
                 <p>
-                  Cart value: <span className="fs-3"> $500</span>
+                  Cart value:{" "}
+                  <span className="fs-3">${totalAmount.toFixed(2)}</span>
                 </p>
 
                 <Button

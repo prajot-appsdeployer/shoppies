@@ -39,6 +39,7 @@ function CartCard({ id, image, title, price, rating, quantity }) {
                     <i className="fa-solid fa-plus "></i>
                   </Button>
                 </div>
+
                 <Button
                   variant="outline-danger "
                   onClick={() => {

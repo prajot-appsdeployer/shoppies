@@ -7,7 +7,7 @@ import { reducer } from "./Reducer";
 const initialState = {
   item: products,
   totalAmount: 0,
-  totalItems: 0,
+  totalItem: 0,
 };
 
 function Cart() {
@@ -44,7 +44,10 @@ function Cart() {
     });
   };
 
-  useEffect(() => {});
+  // to update the data for the cart items numbers
+  useEffect(() => {
+    dispatch({ type: "GET_TOTAL" });
+  }, [state.item]);
 
   return (
     <>

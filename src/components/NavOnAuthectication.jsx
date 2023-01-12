@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import { auth } from "../firebase";
 
-function AuthDetails(props) {
+function AuthDetails({ totalItem }) {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function AuthDetails(props) {
           <Nav.Link href="/cart" className="cart-icon-link">
             <i className="cart-icon fa-solid fa-cart-shopping fa-xl"></i>
             <Badge className="cart-badge" bg="">
-              9
+              {totalItem}
             </Badge>
           </Nav.Link>
 

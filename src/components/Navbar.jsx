@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import AuthDetails from "./NavOnAuthectication";
 
-function NavBar() {
+function NavBar({ totalItem }) {
   return (
     <Navbar id="navbar" variant="light" expand="lg">
       <Container>
@@ -15,7 +15,7 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <>
-              <AuthDetails />
+              <AuthDetails totalItem={totalItem} />
             </>
           </Nav>
         </Navbar.Collapse>
