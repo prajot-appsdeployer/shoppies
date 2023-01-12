@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from "react";
 import CartComponent from "./CartComponent";
-import { ProductContext } from "./App";
-import { products } from "./products";
-import { reducer } from "./Reducer";
+import { ProductContext } from "../App";
+import { products } from "../products";
+import { reducer } from "../Reducer";
 
 const initialState = {
   item: products,

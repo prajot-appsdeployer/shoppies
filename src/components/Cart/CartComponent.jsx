@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 import CartCard from "./CartCard";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { ProductContext } from "./App";
-import FillCardDetails from "./FillCardDetails";
+import { ProductContext } from "../App";
+import FillCardDetails from "../Home/FillCardDetails";
 import Button from "react-bootstrap/esm/Button";
 
 function CartComponent() {

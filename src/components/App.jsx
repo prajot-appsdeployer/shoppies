@@ -1,12 +1,12 @@
 import "../App.css";
 import Login from "./auth/Login";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "./Home";
+import Home from "./Home/Home";
 import SignUp from "./auth/SignUp";
 import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import Cart from "./Cart";
+import Cart from "./Cart/Cart";
 import { products } from "./products";
 
 export const ProductContext = createContext();

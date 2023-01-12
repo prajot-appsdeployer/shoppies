@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ProductContext } from "./App";
+import { ProductContext } from "../App";
 
 function CartCard({ id, image, title, price, rating, quantity }) {
   const { removeItem, increment, decrement } = useContext(ProductContext);

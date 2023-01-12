@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Cards from "./Cards";
-import NavBar from "./Navbar";
-import { ProductContext } from "./App";
+import NavBar from "../Navbar/Navbar";
+import { ProductContext } from "../App";
 
 function Home(props) {
   const item = useContext(ProductContext);

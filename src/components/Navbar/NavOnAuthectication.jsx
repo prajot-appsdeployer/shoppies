@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 
 function AuthDetails({ totalItem }) {
   const [authUser, setAuthUser] = useState(null);
