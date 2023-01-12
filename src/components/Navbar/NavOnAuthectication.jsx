@@ -1,12 +1,14 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import { auth } from "../../firebase";
+import { NavLink } from "react-router-dom";
+import { CartContext } from "../context/Context";
 
-function AuthDetails({ totalItem }) {
+function AuthDetails() {
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() => {
@@ -29,19 +31,24 @@ function AuthDetails({ totalItem }) {
     });
   };
 
+  const GlobalState = useContext(CartContext);
+  const cartItems = GlobalState.state;
+
   return (
     <>
       {authUser ? (
         <>
-          <Nav.Link href="/cart" className="cart-icon-link">
-            <i className="cart-icon fa-solid fa-cart-shopping fa-xl"></i>
-            <Badge className="cart-badge" bg="">
-              {totalItem}
-            </Badge>
-          </Nav.Link>
+          <Nav.Item>
+            <NavLink to="/cart" className="cart-icon-link ">
+              <i className="cart-icon fa-solid fa-cart-shopping fa-xl"></i>
+              <Badge className="cart-badge" bg="">
+                {cartItems.length}
+              </Badge>
+            </NavLink>
+          </Nav.Item>
 
           <NavDropdown title={authUser.email} id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">
+            <NavDropdown.Item>
               <i className="fa-regular fa-user"></i> My Account
             </NavDropdown.Item>
             <NavDropdown.Item onClick={userSignOut}>
@@ -51,17 +58,21 @@ function AuthDetails({ totalItem }) {
         </>
       ) : (
         <>
-          <Nav.Link href="/signup">
-            <Button variant="outline-dark">
-              <i className="fa-solid fa-user-plus"></i> Sign-Up
-            </Button>
-          </Nav.Link>
+          <Nav.Item>
+            <NavLink to="/signup">
+              <Button variant="outline-dark" className="m-2">
+                <i className="fa-solid fa-user-plus"></i> Sign-Up
+              </Button>
+            </NavLink>
+          </Nav.Item>
 
-          <Nav.Link href="/login">
-            <Button variant="dark">
-              <i className="fa-regular fa-user"></i> Login
-            </Button>
-          </Nav.Link>
+          <Nav.Item>
+            <NavLink to="/login">
+              <Button variant="dark" className="m-2">
+                <i className="fa-regular fa-user"></i> Login
+              </Button>
+            </NavLink>
+          </Nav.Item>
         </>
       )}
     </>

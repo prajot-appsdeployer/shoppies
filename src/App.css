@@ -16,12 +16,23 @@
 
 .cart-icon-link {
   position: relative;
+  color: rgba(0, 0, 0, 0.705);
+  transition: 0.2s ease-in;
+}
+
+.cart-icon-link:hover {
+  color: black;
+}
+
+.cart-icon {
+  margin-top: 22px;
+  margin-right: 10px;
 }
 
 .cart-badge {
   position: absolute;
-  top: 6px;
-  left: 12px;
+  top: -2px;
+  left: 5px;
   color: azure;
   font-size: 10px;
 }

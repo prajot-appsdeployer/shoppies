@@ -1,67 +1,42 @@
 export const reducer = (state, action) => {
-  if (action.type === "REMOVE_ITEM") {
-    return {
-      ...state,
-      item: state.item.filter((product) => {
-        return product.id !== action.payload;
-      }),
-    };
-  }
-
-  if (action.type === "CLEAR_CART") {
-    return {
-      ...state,
-      item: [],
-    };
-  }
-
-  if (action.type === "INCREMENT") {
-    const updatedCart = state.item.map((product) => {
-      if (product.id === action.payload) {
-        return {
-          ...product,
-          quantity: product.quantity + 1,
-        };
+  switch (action.type) {
+    case "ADD":
+      const tempstate = state.filter((item) => action.payload.id === item.id);
+      if (tempstate.length > 0) {
+        return state;
+      } else {
+        return [...state, action.payload];
       }
-      return product;
-    });
-    return { ...state, item: updatedCart };
-  }
 
-  if (action.type === "DECREMENT") {
-    const updatedCart = state.item
-      .map((product) => {
-        if (product.id === action.payload) {
-          return {
-            ...product,
-            quantity: product.quantity - 1,
-          };
+    case "INCREASE":
+      const tempstate1 = state.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        } else {
+          return item;
         }
-        return product;
-      })
-      .filter((product) => product.quantity !== 0);
-    return { ...state, item: updatedCart };
+      });
+      return tempstate1;
+
+    case "DECREASE":
+      const tempstate2 = state.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: item.quantity - 1 };
+        } else {
+          return item;
+        }
+      });
+      return tempstate2;
+
+    case "REMOVE":
+      const tempstate3 = state.filter((item) => item.id !== action.payload.id);
+      return tempstate3;
+
+    case "REMOVE_ALL":
+      const tempstate4 = [];
+      return tempstate4;
+
+    default:
+      return state;
   }
-
-  if (action.type === "GET_TOTAL") {
-    let { totalItem, totalAmount } = state.item.reduce(
-      (accum, curVal) => {
-        let { price, quantity } = curVal;
-
-        accum.totalItem += quantity;
-
-        let updatedTotalAmount = price * quantity;
-        accum.totalAmount += updatedTotalAmount;
-
-        return accum;
-      },
-      {
-        totalItem: 0,
-        totalAmount: 0,
-      }
-    );
-    return { ...state, totalItem, totalAmount };
-  }
-
-  return state;
 };

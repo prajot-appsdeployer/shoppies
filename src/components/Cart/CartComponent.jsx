@@ -1,62 +1,49 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
+import { NavLink } from "react-router-dom";
 import CartCard from "./CartCard";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { ProductContext } from "../App";
-import FillCardDetails from "../Home/FillCardDetails";
+import FillCardDetails from "./FillCardDetails";
 import Button from "react-bootstrap/esm/Button";
+import { CartContext } from "../context/Context";
+import EmptyCartSVG from "./EmptyCart.svg";
 
 function CartComponent() {
-  const { item, totalItem, totalAmount, clearCart } =
-    useContext(ProductContext);
+  const GlobalState = useContext(CartContext);
+  const cartItems = GlobalState.state;
+  const dispatch = GlobalState.dispatch;
 
-  if (item.length === 0) {
+  const totalAmout = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
+  const totalItems = cartItems.reduce((total, item) => {
+    return (total = item.quantity + 1);
+  }, 0);
+
+  if (cartItems.length === 0) {
     return (
       <>
-        <Navbar totalItem={totalItem} />
-
         <div className="container mt-3 mb-5">
           <h5 className="mt-2">
-            <Link to="/" className="links">
+            <NavLink to="/" className="links">
               <i className="fa-solid fa-arrow-left"></i> Continue Shopping
-            </Link>
+            </NavLink>
           </h5>
 
-          <div className="row mt-5 gap-5 justify-content-center">
-            {/* Items */}
-            <div className="col-lg-8 h-100  cart-items">
-              <h3 className="mt-2 display-1 fs-3">My Cart</h3>
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <img
+              className="img-fluid"
+              src={EmptyCartSVG}
+              width="400px"
+              alt=""
+            />
+            <h1 className="display-3 "> Your cart is empty.</h1>
 
-              <div className="d-flex mb-3 justify-content-between">
-                <p className="mt-3 align-self-center">
-                  Your cart have <span className="fw-bold"> </span> items.
-                </p>
-
-                <div className="mt-2 ">
-                  <p>
-                    Cart value:{" "}
-                    <span className="fs-3"> ${totalAmount.toFixed(2)}</span>
-                  </p>
-
-                  <Button
-                    variant="danger me-2"
-                    type="submit"
-                    onClick={() => {
-                      clearCart();
-                    }}
-                  >
-                    Clear cart
-                  </Button>
-                  <Button variant="primary" type="submit">
-                    Checkout
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Card dets */}
-            <FillCardDetails />
+            <NavLink to="/" className="mt-3">
+              <Button variant="primary" className="pe-4 ps-4">
+                Add Items
+              </Button>
+            </NavLink>
           </div>
         </div>
       </>
@@ -65,24 +52,29 @@ function CartComponent() {
 
   return (
     <>
-      <Navbar totalItem={totalItem} />
-
       <div className="container mt-4 mb-5">
         <h5 className="mt-2">
-          <Link to="/" className="links">
+          <NavLink to="/" className="links">
             <i className="fa-solid fa-arrow-left"></i> Continue Shopping
-          </Link>
+          </NavLink>
         </h5>
         <div className="row mt-3 gap-5 justify-content-center">
           {/* Items */}
           <div className="col-lg-8 h-100 cart-items">
             <h3 className="mt-2 display-1 fs-3">My Cart</h3>
-            <div className="cart-items-container">
+            <div className=" cart-items-container">
               <Scrollbars>
                 <div className="container mb-2">
                   <div className="row mt-1 p-2 justify-content-center gap-2">
-                    {item.map((product) => {
-                      return <CartCard key={product.id} {...product} />;
+                    {cartItems.map((item) => {
+                      return (
+                        <CartCard
+                          key={item.id}
+                          {...item}
+                          item={item}
+                          dispatch={dispatch}
+                        />
+                      );
                     })}
                   </div>
                 </div>
@@ -91,21 +83,22 @@ function CartComponent() {
 
             <div className="d-flex mb-3 justify-content-between">
               <p className="mt-3 align-self-center">
-                Your cart have <span className="fw-bold"> {totalItem}</span>{" "}
+                Your cart have <span className="fw-bold">{totalItems}</span>{" "}
                 items.
               </p>
 
               <div className="mt-2 ">
                 <p>
-                  Cart value:{" "}
-                  <span className="fs-3">${totalAmount.toFixed(2)}</span>
+                  <span className="fs-3">${totalAmout.toFixed(2)}</span>
                 </p>
 
                 <Button
                   variant="danger me-2"
                   type="submit"
                   onClick={() => {
-                    clearCart();
+                    dispatch({
+                      type: "REMOVE_ALL",
+                    });
                   }}
                 >
                   Clear cart

@@ -2,17 +2,15 @@ import "../App.css";
 import Login from "./auth/Login";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./Home/Home";
+import NavBar from "./Navbar/Navbar";
 import SignUp from "./auth/SignUp";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import Cart from "./Cart/Cart";
-import { products } from "./products";
-
-export const ProductContext = createContext();
+import NotFound from "./notfound/NotFound";
 
 function App() {
-  const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(null);
 
   useEffect(() => {
@@ -31,27 +29,13 @@ function App() {
 
   return (
     <>
-      {/* Login Form */}
+      <NavBar />
       <Routes>
-        {loggedIn ? (
-          <>
-            <Route
-              path="/"
-              element={
-                <>
-                  <ProductContext.Provider value={products}>
-                    <Home loggedIn={loggedIn} />
-                  </ProductContext.Provider>
-                </>
-              }
-            />
-            <Route path="/cart" element={<Cart />} />
-          </>
-        ) : (
-          navigate("/login")
-        )}
+        <Route path="/" element={<Home loggedIn={loggedIn} />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

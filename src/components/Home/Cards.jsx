@@ -1,8 +1,21 @@
+import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import { CartContext } from "../context/Context";
 
-function Cards({ image, title, price, rating, category }) {
+function Cards({
+  id,
+  image,
+  title,
+  price,
+  rating,
+  category,
+  dispatch,
+  product,
+}) {
+  const [isClicked, setIsClicked] = useState(false);
+
   return (
     <>
       <Card className="col-md-3 p-0" style={{ width: "18rem" }}>
@@ -18,7 +31,33 @@ function Cards({ image, title, price, rating, category }) {
 
         <ListGroup className="list-group m-2 mb-3">
           <Button variant="outline-primary mb-2 ">Add to wishlist</Button>
-          <Button variant="primary ">Add to cart</Button>
+          {isClicked ? (
+            <Button
+              variant="danger "
+              onClick={() => {
+                dispatch({
+                  type: "REMOVE",
+                  payload: product,
+                });
+                setIsClicked(!isClicked);
+              }}
+            >
+              Remove from cart
+            </Button>
+          ) : (
+            <Button
+              variant="primary "
+              onClick={() => {
+                dispatch({
+                  type: "ADD",
+                  payload: product,
+                });
+                setIsClicked(!isClicked);
+              }}
+            >
+              Add to cart
+            </Button>
+          )}
         </ListGroup>
 
         <Card.Footer className="text-muted">Category: {category}</Card.Footer>
