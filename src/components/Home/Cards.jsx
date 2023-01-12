@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import { CartContext } from "../context/Context";
 
 function Cards({
   id,

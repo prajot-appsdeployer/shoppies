@@ -1,6 +1,6 @@
 import "../App.css";
 import Login from "./auth/Login";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Home/Home";
 import NavBar from "./Navbar/Navbar";
 import SignUp from "./auth/SignUp";
