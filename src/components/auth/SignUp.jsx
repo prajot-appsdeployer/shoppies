@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import SignupSVG from "./Signup.svg";
+import { doc, setDoc } from "firebase/firestore";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -16,11 +17,20 @@ function SignUp() {
   const signUp = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
+      .then(async (authState) => {
+        const data = doc(db, "users", authState.user.uid);
+        await setDoc(data, {
+          uid: authState.user.uid,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+        }).catch((err) => console.log(err.message));
+      })
       .then(() => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 
@@ -32,8 +42,8 @@ function SignUp() {
             <h1 className="display-5 text-center">Create a new account</h1>
             <div className="signup-form mt-3">
               <Form id="signup" onSubmit={signUp}>
-                <Form.Group className="mb-3 row" controlId="full-name">
-                  <div className="col-md-6">
+                <div className="row">
+                  <Form.Group className="mb-3 col-md-6" controlId="first-name">
                     <Form.Label>First name </Form.Label>
                     <Form.Control
                       type="text"
@@ -43,9 +53,9 @@ function SignUp() {
                         setFirstName(e.target.value);
                       }}
                     />
-                  </div>
+                  </Form.Group>
 
-                  <div className="col-md-6">
+                  <Form.Group className="mb-3 col-md-6" controlId="last-name">
                     <Form.Label>Last name </Form.Label>
                     <Form.Control
                       type="text"
@@ -55,8 +65,8 @@ function SignUp() {
                         setLastName(e.target.value);
                       }}
                     />
-                  </div>
-                </Form.Group>
+                  </Form.Group>
+                </div>
 
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Label>Email address</Form.Label>

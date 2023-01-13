@@ -17,7 +17,6 @@ function Home(props) {
 
   const GlobalState = useContext(CartContext);
   const dispatch = GlobalState.dispatch;
-  console.log(GlobalState);
 
   return (
     <>

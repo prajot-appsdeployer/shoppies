@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
+
 import LoginSVG from "./Login.svg";
 
 function Login() {
@@ -19,7 +20,7 @@ function Login() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 

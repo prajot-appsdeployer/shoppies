@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import Cart from "./Cart/Cart";
 import NotFound from "./notfound/NotFound";
+import Wishlist from "./Wishlist/Wishlist";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(null);
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home loggedIn={loggedIn} />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
