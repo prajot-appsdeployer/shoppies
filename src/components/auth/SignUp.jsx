@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -16,10 +16,18 @@ function SignUp() {
 
   const signUp = (e) => {
     e.preventDefault();
+
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (authState) => {
-        const data = doc(db, "users", authState.user.uid);
-        await setDoc(data, {
+        // to set the displayName as the firstName
+
+        await updateProfile(authState.user, {
+          displayName: firstName,
+        });
+
+        // to save the user to the firebase with the user id
+        const docRef = doc(db, "usersdetails", authState.user.uid);
+        await setDoc(docRef, {
           uid: authState.user.uid,
           firstName: firstName,
           lastName: lastName,
@@ -46,6 +54,7 @@ function SignUp() {
                   <Form.Group className="mb-3 col-md-6" controlId="first-name">
                     <Form.Label>First name </Form.Label>
                     <Form.Control
+                      required
                       type="text"
                       placeholder="Enter first name"
                       value={firstName}
@@ -58,6 +67,7 @@ function SignUp() {
                   <Form.Group className="mb-3 col-md-6" controlId="last-name">
                     <Form.Label>Last name </Form.Label>
                     <Form.Control
+                      required
                       type="text"
                       placeholder="Enter last name"
                       value={lastName}
@@ -71,6 +81,7 @@ function SignUp() {
                 <Form.Group className="mb-3" controlId="email">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
+                    required
                     type="email"
                     placeholder="Enter email"
                     value={email}
@@ -83,6 +94,7 @@ function SignUp() {
                 <Form.Group className="mb-2" controlId="password">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
+                    required
                     type="password"
                     placeholder="Password"
                     value={password}

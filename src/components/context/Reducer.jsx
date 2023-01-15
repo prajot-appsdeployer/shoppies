@@ -1,3 +1,4 @@
+// For cart
 export const reducer = (state, action) => {
   switch (action.type) {
     case "ADD":
@@ -35,6 +36,35 @@ export const reducer = (state, action) => {
     case "REMOVE_ALL":
       const tempstate4 = [];
       return tempstate4;
+
+    // case "ADD_ALL":
+    //   return [...state, state.concat(action.payload)];
+    // // const tempstate5 = state.map(action.payload);
+    // // return tempstate5;
+
+    default:
+      return state;
+  }
+};
+
+// For wishlist
+export const reducer1 = (state, action) => {
+  switch (action.type) {
+    case "ADD_TO_WISHLIST":
+      const tempstate = state.filter((item) => action.payload.id === item.id);
+      if (tempstate.length > 0) {
+        return state;
+      } else {
+        return [...state, action.payload];
+      }
+
+    case "REMOVE_FROM_WISHLIST":
+      const tempstate1 = state.filter((item) => item.id !== action.payload.id);
+      return tempstate1;
+
+    case "REMOVE_ALL":
+      const tempstate2 = [];
+      return tempstate2;
 
     default:
       return state;

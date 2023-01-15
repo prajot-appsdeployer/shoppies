@@ -1,7 +1,8 @@
 import React from "react";
-import WishlistSVG from "./Wishlist.svg";
+import WishlistComponent from "./WishlistComponent";
+
 function Wishlist() {
-  return <div>Wishlist</div>;
+  return <WishlistComponent />;
 }
 
 export default Wishlist;

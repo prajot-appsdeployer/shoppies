@@ -1,5 +1,5 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import React, { useContext, useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -9,21 +9,8 @@ import { NavLink } from "react-router-dom";
 import { CartContext } from "../context/Context";
 
 function AuthDetails() {
-  const [authUser, setAuthUser] = useState(null);
-
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(null);
-      }
-    });
-
-    return () => {
-      listen();
-    };
-  }, []);
+  const { GlobalState, userState } = useContext(CartContext);
+  const cartItems = GlobalState.state;
 
   const userSignOut = () => {
     signOut(auth).then(() => {
@@ -31,12 +18,9 @@ function AuthDetails() {
     });
   };
 
-  const GlobalState = useContext(CartContext);
-  const cartItems = GlobalState.state;
-
   return (
     <>
-      {authUser ? (
+      {userState ? (
         <>
           <Nav.Item className="me-3">
             <NavLink to="/wishlist" className="cart-icon-link ">
@@ -53,10 +37,11 @@ function AuthDetails() {
             </NavLink>
           </Nav.Item>
 
-          <NavDropdown title={authUser.email} id="basic-nav-dropdown">
+          <NavDropdown title={userState.displayName} id="basic-nav-dropdown">
             <NavDropdown.Item>
               <i className="fa-regular fa-user"></i> My Account
             </NavDropdown.Item>
+
             <NavDropdown.Item onClick={userSignOut}>
               <i className="fa-solid fa-arrow-right-from-bracket"></i> Logout
             </NavDropdown.Item>
