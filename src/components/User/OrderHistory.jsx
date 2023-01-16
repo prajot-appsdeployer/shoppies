@@ -1,18 +1,22 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../firebase";
 import OrderHistoryDetails from "./OrderHistoryDetails";
+import { GlobalContext } from "../context/Context";
 
 function OrderHistory() {
+  const { userState } = useContext(GlobalContext);
   const [orderData, setOrderData] = useState([]);
 
   const purchaseHistory = async () => {
+    const currUserId = userState.uid;
     const items = query(
       collection(db, "purchaseHistory"),
-      orderBy("createdOnDate", "desc")
+      orderBy("createdOnDate", "desc"),
+      where("userID", "==", currUserId)
     );
-    const querySnapshot = await getDocs(items);
 
+    const querySnapshot = await getDocs(items);
     const list = [];
     querySnapshot.forEach((doc) => {
       list.push(doc.data());
@@ -22,7 +26,7 @@ function OrderHistory() {
 
   useEffect(() => {
     purchaseHistory();
-  }, []);
+  });
 
   return (
     <div className="mt-5 mb-5 container">

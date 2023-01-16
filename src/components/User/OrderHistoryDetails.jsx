@@ -14,7 +14,7 @@ function OrderHistoryDetails({ orders, orderData }) {
         <p className="m-0">
           Purchased on : {orders.createdOnDate.toDate().toLocaleString()}
         </p>
-        <p className="m-0">Order Payment : ${orders.totalAmount}</p>
+        <p className="m-0">Amount paid : ${orders.totalAmount}</p>
 
         <p className="m-0">
           <Link
@@ -38,7 +38,7 @@ function OrderHistoryDetails({ orders, orderData }) {
 
       <Collapse in={open}>
         <div id="item-details" className="mt-3">
-          <p className="ms-3">Number of Items: {orders.totalItems}</p>{" "}
+          <p className="ms-3">Number of Items : {orders.totalItems}</p>{" "}
           {orders.purchasedItems.map((item) => {
             return <OrderCard key={item.id} {...item} item={item} />;
           })}
