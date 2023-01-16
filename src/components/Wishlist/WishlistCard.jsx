@@ -1,17 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
+import { GlobalContext } from "../context/Context";
 
-function WishlistCard({
-  id,
-  image,
-  title,
-  price,
-  rating,
-  quantity,
-  item,
-  dispatch,
-  dispatchWishlist,
-}) {
+function WishlistCard({ id, image, title, price, rating, quantity, product }) {
+  const { wishlistRemoveItem, addItem } = useContext(GlobalContext);
+
   return (
     <>
       <div className="card mb-3">
@@ -34,12 +27,7 @@ function WishlistCard({
               <div className=" mt-4 d-flex justify-items-center gap-3">
                 <Button
                   variant="outline-danger "
-                  onClick={() =>
-                    dispatchWishlist({
-                      type: "REMOVE_FROM_WISHLIST",
-                      payload: item,
-                    })
-                  }
+                  onClick={() => wishlistRemoveItem(product)}
                 >
                   Remove from Wishlist
                 </Button>
@@ -47,12 +35,8 @@ function WishlistCard({
                 <Button
                   variant="primary "
                   onClick={() => {
-                    dispatch({
-                      type: "ADD",
-                      payload: item,
-                    });
-
-                    alert("Items added to cart");
+                    addItem(product);
+                    alert("Item added to cart");
                   }}
                 >
                   Add to cart

@@ -6,11 +6,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import { auth } from "../../firebase";
 import { NavLink } from "react-router-dom";
-import { CartContext } from "../context/Context";
+import { GlobalContext } from "../context/Context";
 
 function NavOnAuthectication() {
-  const { GlobalState, userState } = useContext(CartContext);
-  const cartItems = GlobalState.state;
+  const { CartState, userState } = useContext(GlobalContext);
+  const cartItems = CartState.state;
 
   const userSignOut = () => {
     signOut(auth).then(() => {

@@ -4,16 +4,15 @@ import CartCard from "./CartCard";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import FillCardDetails from "./FillCardDetails";
 import Button from "react-bootstrap/esm/Button";
-import { CartContext } from "../context/Context";
+import { GlobalContext } from "../context/Context";
 import EmptyCartSVG from "./EmptyCart.svg";
 
 function CartComponent() {
-  const { GlobalState } = useContext(CartContext);
-  const cartItems = GlobalState.state;
-  const dispatch = GlobalState.dispatch;
+  const { CartState, clearCart } = useContext(GlobalContext);
+  const cartItems = CartState.state;
 
-  const totalAmout = cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
+  const totalAmout = cartItems.reduce((total, product) => {
+    return total + product.price * product.quantity;
   }, 0);
 
   function checkout() {}
@@ -56,6 +55,7 @@ function CartComponent() {
             <i className="fa-solid fa-arrow-left"></i> Continue Shopping
           </NavLink>
         </h5>
+
         <div className="row mt-3 gap-5 justify-content-center">
           {/* Items */}
           <div className="col-lg-8 h-100 cart-items">
@@ -64,13 +64,12 @@ function CartComponent() {
               <Scrollbars>
                 <div className="container mb-2">
                   <div className="row mt-1 p-2 justify-content-center gap-2">
-                    {cartItems.map((item) => {
+                    {cartItems.map((product) => {
                       return (
                         <CartCard
-                          key={item.id}
-                          {...item}
-                          item={item}
-                          dispatch={dispatch}
+                          key={product.id}
+                          {...product}
+                          product={product}
                         />
                       );
                     })}
@@ -93,11 +92,7 @@ function CartComponent() {
                 <Button
                   variant="danger me-2"
                   type="submit"
-                  onClick={() => {
-                    dispatch({
-                      type: "REMOVE_ALL",
-                    });
-                  }}
+                  onClick={() => clearCart()}
                 >
                   Clear cart
                 </Button>

@@ -2,22 +2,17 @@ import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import { CartContext } from "../context/Context";
+import { GlobalContext } from "../context/Context";
 
-function Cards({
-  id,
-  image,
-  title,
-  price,
-  rating,
-  category,
-  cartItems,
-  dispatch,
-  wishlistItems,
-  dispatchWishlist,
-  product,
-}) {
-  const { userState } = useContext(CartContext);
+function Cards({ id, image, title, price, rating, category, product }) {
+  const {
+    userState,
+    addItem,
+    removeItem,
+    wishlistAddItem,
+    wishlistRemoveItem,
+  } = useContext(GlobalContext);
+
   const [isClicked, setIsClicked] = useState(false);
   const [isWishlistClicked, setIsWishlistClicked] = useState(false);
 
@@ -43,10 +38,7 @@ function Cards({
                   variant="outline-danger "
                   className="mb-2"
                   onClick={() => {
-                    dispatchWishlist({
-                      type: "REMOVE_FROM_WISHLIST",
-                      payload: product,
-                    });
+                    wishlistRemoveItem(product);
                     setIsWishlistClicked(!isWishlistClicked);
                   }}
                 >
@@ -56,10 +48,7 @@ function Cards({
                 <Button
                   variant="outline-primary mb-2"
                   onClick={() => {
-                    dispatchWishlist({
-                      type: "ADD_TO_WISHLIST",
-                      payload: product,
-                    });
+                    wishlistAddItem(product);
                     setIsWishlistClicked(!isWishlistClicked);
                   }}
                 >
@@ -71,10 +60,7 @@ function Cards({
                 <Button
                   variant="danger "
                   onClick={() => {
-                    dispatch({
-                      type: "REMOVE",
-                      payload: product,
-                    });
+                    removeItem(product);
                     setIsClicked(!isClicked);
                   }}
                 >
@@ -84,10 +70,7 @@ function Cards({
                 <Button
                   variant="primary "
                   onClick={() => {
-                    dispatch({
-                      type: "ADD",
-                      payload: product,
-                    });
+                    addItem(product);
                     setIsClicked(!isClicked);
                   }}
                 >

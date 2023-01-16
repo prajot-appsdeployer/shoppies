@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Cards from "./Cards";
-import { CartContext } from "../context/Context";
+import { GlobalContext } from "../context/Context";
 import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 // import axios from "axios";
@@ -29,12 +29,7 @@ function Home() {
     Api();
   }, []);
 
-  const { GlobalState, userState } = useContext(CartContext);
-  const cartItems = GlobalState.state;
-  const dispatch = GlobalState.dispatch;
-
-  const wishlistItems = GlobalState.state1;
-  const dispatchWishlist = GlobalState.dispatch1;
+  const { userState } = useContext(GlobalContext);
 
   return (
     <>
@@ -64,17 +59,7 @@ function Home() {
         <div className="mt-3 row justify-content-center gap-5 mb-5">
           {products.map((product) => {
             product.quantity = 1;
-            return (
-              <Cards
-                key={product.id}
-                {...product}
-                product={product}
-                cartItems={cartItems}
-                dispatch={dispatch}
-                wishlistItems={wishlistItems}
-                dispatchWishlist={dispatchWishlist}
-              />
-            );
+            return <Cards key={product.id} {...product} product={product} />;
           })}
         </div>
       </div>

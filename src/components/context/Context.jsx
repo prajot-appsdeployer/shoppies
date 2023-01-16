@@ -4,7 +4,7 @@ import { auth } from "../../firebase";
 import { reducer } from "./Reducer";
 import { reducer1 } from "./Reducer";
 
-export const CartContext = createContext();
+export const GlobalContext = createContext();
 
 export const Context = (props) => {
   // User Login state
@@ -20,13 +20,72 @@ export const Context = (props) => {
     });
   }, []);
 
+  // FOR CART
   const [state, dispatch] = useReducer(reducer, []);
-  const [state1, dispatch1] = useReducer(reducer1, []);
+  const addItem = (product) =>
+    dispatch({
+      type: "ADD",
+      payload: product,
+    });
 
-  const GlobalState = { state, dispatch, state1, dispatch1 };
+  const removeItem = (product) =>
+    dispatch({
+      type: "REMOVE",
+      payload: product,
+    });
+
+  const clearCart = () => {
+    dispatch({
+      type: "REMOVE_ALL",
+    });
+  };
+
+  const increaseQuantity = (product) => {
+    dispatch({ type: "INCREASE", payload: product });
+  };
+  const decreaseQuantity = (product) => {
+    dispatch({ type: "DECREASE", payload: product });
+  };
+
+  // FOR WISHLIST
+  const [state1, dispatchWishlist] = useReducer(reducer1, []);
+  const wishlistRemoveItem = (product) => {
+    dispatchWishlist({
+      type: "REMOVE_FROM_WISHLIST",
+      payload: product,
+    });
+  };
+
+  const wishlistAddItem = (product) => {
+    dispatchWishlist({
+      type: "ADD_TO_WISHLIST",
+      payload: product,
+    });
+  };
+
+  const clearWishlist = () => {
+    dispatchWishlist({
+      type: "REMOVE_ALL",
+    });
+  };
+
+  const CartState = { state, state1 };
   return (
-    <CartContext.Provider value={{ GlobalState, userState }}>
+    <GlobalContext.Provider
+      value={{
+        userState,
+        CartState,
+        addItem,
+        removeItem,
+        clearCart,
+        increaseQuantity,
+        decreaseQuantity,
+        wishlistRemoveItem,
+        wishlistAddItem,
+        clearWishlist,
+      }}
+    >
       {props.children}
-    </CartContext.Provider>
+    </GlobalContext.Provider>
   );
 };

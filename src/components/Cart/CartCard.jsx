@@ -1,17 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import { GlobalContext } from "../context/Context";
 
-function CartCard({
-  id,
-  image,
-  title,
-  price,
-  rating,
-  quantity,
-  item,
-  dispatch,
-}) {
+function CartCard({ id, image, title, price, rating, quantity, product }) {
+  const { removeItem, increaseQuantity, decreaseQuantity } =
+    useContext(GlobalContext);
+
   return (
     <>
       <div className="card mb-3">
@@ -37,9 +32,9 @@ function CartCard({
                     variant=""
                     onClick={() => {
                       if (quantity > 1) {
-                        dispatch({ type: "DECREASE", payload: item });
+                        decreaseQuantity(product);
                       } else {
-                        dispatch({ type: "REMOVE", payload: item });
+                        removeItem(product);
                       }
                     }}
                   >
@@ -57,19 +52,14 @@ function CartCard({
                     {quantity}
                   </p>
 
-                  <Button
-                    variant=""
-                    onClick={() =>
-                      dispatch({ type: "INCREASE", payload: item })
-                    }
-                  >
+                  <Button variant="" onClick={() => increaseQuantity(product)}>
                     <i className="fa-solid fa-plus "></i>
                   </Button>
                 </div>
 
                 <Button
                   variant="outline-danger "
-                  onClick={() => dispatch({ type: "REMOVE", payload: item })}
+                  onClick={() => removeItem(product)}
                 >
                   Remove
                 </Button>

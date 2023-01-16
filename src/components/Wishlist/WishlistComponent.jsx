@@ -2,16 +2,13 @@ import React, { useContext } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Scrollbars from "react-custom-scrollbars-2";
 import { NavLink } from "react-router-dom";
-import { CartContext } from "../context/Context";
+import { GlobalContext } from "../context/Context";
 import WishlistSVG from "./Wishlist.svg";
 import WishlistCard from "./WishlistCard";
 
 function WishlistComponent() {
-  const { GlobalState } = useContext(CartContext);
-  const wishlistItems = GlobalState.state1;
-  const dispatchWishlist = GlobalState.dispatch1;
-
-  const dispatch = GlobalState.dispatch;
+  const { CartState, clearWishlist } = useContext(GlobalContext);
+  const wishlistItems = CartState.state1;
 
   if (wishlistItems.length === 0) {
     return (
@@ -54,14 +51,12 @@ function WishlistComponent() {
               <Scrollbars>
                 <div className="container mb-2">
                   <div className="row mt-1 p-2 justify-content-center gap-2">
-                    {wishlistItems.map((item) => {
+                    {wishlistItems.map((product) => {
                       return (
                         <WishlistCard
-                          key={item.id}
-                          {...item}
-                          item={item}
-                          dispatch={dispatch}
-                          dispatchWishlist={dispatchWishlist}
+                          key={product.id}
+                          {...product}
+                          product={product}
                         />
                       );
                     })}
@@ -81,9 +76,7 @@ function WishlistComponent() {
                   variant="danger me-2"
                   type="submit"
                   onClick={() => {
-                    dispatchWishlist({
-                      type: "REMOVE_ALL",
-                    });
+                    clearWishlist();
                   }}
                 >
                   Clear wishlist
