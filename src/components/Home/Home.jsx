@@ -40,10 +40,12 @@ function Home() {
     <>
       <div className="container ">
         {userState ? (
-          <h1 className="text-center mt-4">
-            Welcome to the Shoppies, {userState.displayName} !
+          <h1 className="text-center mt-3 mb-3 display-6 fs-4">
+            Welcome to the Shoppies, {userState.displayName}!
           </h1>
         ) : null}
+
+        <h1 className="text-center mt-4 display-3">Store</h1>
 
         {/* <Button
           variant="danger"
@@ -59,7 +61,7 @@ function Home() {
           Copy
         </Button> */}
 
-        <div className="mt-5 row justify-content-center gap-5 mb-5">
+        <div className="mt-3 row justify-content-center gap-5 mb-5">
           {products.map((product) => {
             product.quantity = 1;
             return (

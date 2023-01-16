@@ -8,7 +8,7 @@ import { auth } from "../../firebase";
 import { NavLink } from "react-router-dom";
 import { CartContext } from "../context/Context";
 
-function AuthDetails() {
+function NavOnAuthectication() {
   const { GlobalState, userState } = useContext(CartContext);
   const cartItems = GlobalState.state;
 
@@ -37,7 +37,12 @@ function AuthDetails() {
             </NavLink>
           </Nav.Item>
 
-          <NavDropdown title={userState.displayName} id="basic-nav-dropdown">
+          <NavDropdown
+            title={userState.displayName}
+            drop="down-centered"
+            align="end"
+            id="dropdown-button-drop-down-centered"
+          >
             <NavDropdown.Item>
               <i className="fa-regular fa-user"></i> My Account
             </NavDropdown.Item>
@@ -70,4 +75,4 @@ function AuthDetails() {
   );
 }
 
-export default AuthDetails;
+export default NavOnAuthectication;
