@@ -43,8 +43,16 @@ export const Context = (props) => {
   const increaseQuantity = (product) => {
     dispatch({ type: "INCREASE", payload: product });
   };
+
   const decreaseQuantity = (product) => {
     dispatch({ type: "DECREASE", payload: product });
+  };
+
+  const addAllToCart = (wishlistItems) => {
+    dispatch({
+      type: "ADD_ALL",
+      payload: wishlistItems,
+    });
   };
 
   // FOR WISHLIST
@@ -83,6 +91,7 @@ export const Context = (props) => {
         wishlistRemoveItem,
         wishlistAddItem,
         clearWishlist,
+        addAllToCart,
       }}
     >
       {props.children}

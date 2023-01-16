@@ -37,10 +37,15 @@ export const reducer = (state, action) => {
       const tempstate4 = [];
       return tempstate4;
 
-    // case "ADD_ALL":
-    //   return [...state, state.concat(action.payload)];
-    // // const tempstate5 = state.map(action.payload);
-    // // return tempstate5;
+    case "ADD_ALL":
+      const tempstate5 = action.payload;
+      tempstate5.forEach((element) => {
+        const checkArr = state.filter((item) => element.id === item.id);
+        if (checkArr.length === 0) {
+          state.push(element);
+        }
+      });
+      return state;
 
     default:
       return state;

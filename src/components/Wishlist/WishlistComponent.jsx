@@ -7,7 +7,7 @@ import WishlistSVG from "./Wishlist.svg";
 import WishlistCard from "./WishlistCard";
 
 function WishlistComponent() {
-  const { CartState, clearWishlist } = useContext(GlobalContext);
+  const { CartState, clearWishlist, addAllToCart } = useContext(GlobalContext);
   const wishlistItems = CartState.state1;
 
   if (wishlistItems.length === 0) {
@@ -75,25 +75,21 @@ function WishlistComponent() {
                 <Button
                   variant="danger me-2"
                   type="submit"
-                  onClick={() => {
-                    clearWishlist();
-                  }}
+                  onClick={() => clearWishlist()}
                 >
                   Clear wishlist
                 </Button>
 
-                {/* <Button
+                <Button
                   variant="primary"
                   type="submit"
                   onClick={() => {
-                    dispatch({
-                      type: "ADD_ALL",
-                      payload: wishlistItems,
-                    });
+                    addAllToCart(wishlistItems);
+                    clearWishlist();
                   }}
                 >
                   Add all to cart
-                </Button> */}
+                </Button>
               </div>
             </div>
           </div>
