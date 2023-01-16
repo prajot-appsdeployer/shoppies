@@ -44,7 +44,13 @@ function NavOnAuthectication() {
             id="dropdown-button-drop-down-centered"
           >
             <NavDropdown.Item>
-              <i className="fa-regular fa-user"></i> My Account
+              <NavLink
+                to="/orderhistory"
+                className="text-decoration-none"
+                style={{ color: "inherit" }}
+              >
+                <i className="fa-solid fa-clock-rotate-left"></i> Order History
+              </NavLink>
             </NavDropdown.Item>
 
             <NavDropdown.Item onClick={userSignOut}>

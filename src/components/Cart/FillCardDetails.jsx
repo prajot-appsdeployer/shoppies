@@ -3,11 +3,17 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { GlobalContext } from "../context/Context";
 import { db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 function FillCardDetails(props) {
   const { CartState, userState } = useContext(GlobalContext);
   const cartItems = CartState.state;
+
+  // eslint-disable-next-line
+  const [cvv, setCVV] = useState("");
+
+  // Random order ID generator
+  const orderId = Math.floor(Math.random() * 900000) + 100000;
 
   const userDetails = {
     userID: userState.uid,
@@ -18,7 +24,6 @@ function FillCardDetails(props) {
   const [cardDetails, setCardDetails] = useState({
     cardNumber: "",
     expiryDate: "",
-    cvv: "",
     nameOnCard: "",
   });
 
@@ -28,23 +33,38 @@ function FillCardDetails(props) {
     purchasedItems: cartItems,
   };
 
-  const purchaseDetails = { ...userDetails, ...cardDetails, ...cartDetails };
+  const timestamp = {
+    createdOnDate: serverTimestamp(),
+  };
 
-  // Random order ID generator
-  const orderID = Math.floor(Math.random() * 900000) + 100000;
+  const purchaseDetails = {
+    orderId: orderId,
+    ...userDetails,
+    ...cardDetails,
+    ...cartDetails,
+    ...timestamp,
+  };
 
   const checkout = async (e) => {
-    const docRef = doc(db, "purchaseHistory", "" + orderID);
+    e.preventDefault();
+    const docRef = doc(db, "purchaseHistory", "" + orderId);
     await setDoc(docRef, purchaseDetails)
       .then(alert("Payment Successful."))
-      .catch((err) => console.log(err.message));
+      .catch((err) => alert(err.message));
+
+    console.log(purchaseDetails);
   };
 
   return (
     <>
       {/* Checkout */}
       <div className="col-lg-3 h-100 checkout-dets mb-4">
-        <Form className="row p-3" onSubmit={checkout}>
+        <h1 className="fs-5 ">
+          <i className="p-2 pb-0 fa-regular fa-credit-card"></i> Enter Card
+          Details
+        </h1>
+
+        <Form className="row p-2" onSubmit={checkout}>
           <Form.Group className="col-sm-12 mb-3">
             <Form.Label>Card Number</Form.Label>
             <Form.Control
@@ -88,7 +108,7 @@ function FillCardDetails(props) {
               minLength="3"
               maxLength="3"
               onChange={(e) => {
-                setCardDetails((prev) => ({ ...prev, cvv: e.target.value }));
+                setCVV(e.target.value);
               }}
             />
           </Form.Group>
