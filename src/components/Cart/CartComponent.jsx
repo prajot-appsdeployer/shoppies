@@ -15,8 +15,6 @@ function CartComponent() {
     return total + product.price * product.quantity;
   }, 0);
 
-  function checkout() {}
-
   if (cartItems.length === 0) {
     return (
       <>
@@ -96,18 +94,11 @@ function CartComponent() {
                 >
                   Clear cart
                 </Button>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  onClick={() => checkout()}
-                >
-                  Checkout
-                </Button>
               </div>
             </div>
           </div>
 
-          <FillCardDetails />
+          <FillCardDetails cartItems={cartItems} totalAmout={totalAmout} />
         </div>
       </div>
     </>

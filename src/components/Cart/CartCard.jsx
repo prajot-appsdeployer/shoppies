@@ -52,7 +52,12 @@ function CartCard({ id, image, title, price, rating, quantity, product }) {
                     {quantity}
                   </p>
 
-                  <Button variant="" onClick={() => increaseQuantity(product)}>
+                  <Button
+                    variant=""
+                    onClick={() => {
+                      increaseQuantity(product);
+                    }}
+                  >
                     <i className="fa-solid fa-plus "></i>
                   </Button>
                 </div>

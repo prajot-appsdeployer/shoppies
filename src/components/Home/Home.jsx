@@ -7,9 +7,11 @@ import { db } from "../../firebase";
 // import Button from "react-bootstrap/esm/Button";
 
 function Home() {
+  const { userState } = useContext(GlobalContext);
   const [products, setProducts] = useState([]);
 
   const Api = async () => {
+    // to call data from firestore database
     const items = query(collection(db, "products"), orderBy("id"));
     const querySnapshot = await getDocs(items);
 
@@ -28,8 +30,6 @@ function Home() {
   useEffect(() => {
     Api();
   }, []);
-
-  const { userState } = useContext(GlobalContext);
 
   return (
     <>
