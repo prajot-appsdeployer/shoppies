@@ -22,7 +22,7 @@ function OrderHistoryDetails({ orders, orderData }) {
               setOpen(!open);
               setIsClicked(!isClicked);
             }}
-            aria-controls="example-collapse-text"
+            aria-controls="item-details"
             aria-expanded={open}
             style={{ color: "inherit" }}
           >
