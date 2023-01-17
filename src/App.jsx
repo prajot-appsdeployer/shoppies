@@ -1,13 +1,13 @@
 import "./css/App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
+import Home from "./pages/Home";
 import NavBar from "./components/Navbar/Navbar";
-import Login from "./Pages/auth/Login";
-import SignUp from "./Pages/auth/SignUp";
-import Cart from "./Pages/Cart";
-import NotFound from "./Pages/Others/NotFound";
-import Wishlist from "./Pages/Wishlist";
-import OrderHistory from "./Pages/OrderHistory";
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/Others/NotFound";
+import Wishlist from "./pages/Wishlist";
+import OrderHistory from "./pages/OrderHistory";
 import { PrivateRoute } from "./components/Privateroute";
 
 function App() {
