@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import CartCard from "./CartCard";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import FillCardDetails from "./FillCardDetails";
+import FillCardDetails from "./Checkout";
 import Button from "react-bootstrap/esm/Button";
 import { GlobalContext } from "../../context/Context";
 import EmptyCartSVG from "./EmptyCart.svg";

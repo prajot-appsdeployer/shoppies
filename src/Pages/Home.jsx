@@ -53,7 +53,7 @@ function Home() {
             products.forEach((item) => {
               const productData = doc(db, "products", "" + item.id);
               setDoc(productData, item).catch((err) =>
-                console.log(err.message)
+                console.error(err.message)
               );
             });
           }}

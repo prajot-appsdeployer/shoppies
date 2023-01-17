@@ -36,7 +36,7 @@ function WishlistCard({ id, image, title, price, rating, quantity, product }) {
                   variant="primary "
                   onClick={() => {
                     addItem(product);
-                    alert("Item added to cart");
+                    wishlistRemoveItem(product);
                   }}
                 >
                   Add to cart

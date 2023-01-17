@@ -23,13 +23,13 @@ function NavOnAuthectication() {
       {userState ? (
         <>
           <Nav.Item className="me-3">
-            <NavLink to="/user/wishlist" className="cart-icon-link ">
+            <NavLink to="/wishlist" className="cart-icon-link ">
               <i className=" cart-icon fa-solid fa-clipboard-list fa-xl"></i>
             </NavLink>
           </Nav.Item>
 
           <Nav.Item className="me-2">
-            <NavLink to="/user/cart" className="cart-icon-link ">
+            <NavLink to="/cart" className="cart-icon-link ">
               <i className="cart-icon fa-solid fa-cart-shopping fa-xl"></i>
               <Badge className="cart-badge" bg="">
                 {cartItems.length}
@@ -45,7 +45,7 @@ function NavOnAuthectication() {
           >
             <NavDropdown.Item>
               <NavLink
-                to="/user/orderhistory"
+                to="/orderhistory"
                 className="text-decoration-none"
                 style={{ color: "inherit" }}
               >

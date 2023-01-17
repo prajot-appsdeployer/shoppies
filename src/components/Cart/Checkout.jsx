@@ -46,13 +46,10 @@ function FillCardDetails(props) {
   };
 
   const checkout = async (e) => {
-    e.preventDefault();
     const docRef = doc(db, "purchaseHistory", "" + orderId);
     await setDoc(docRef, purchaseDetails)
       .then(alert("Payment Successful."))
       .catch((err) => alert(err.message));
-
-    console.log(purchaseDetails);
   };
 
   return (
