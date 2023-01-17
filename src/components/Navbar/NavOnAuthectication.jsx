@@ -62,7 +62,7 @@ function NavOnAuthectication() {
         <>
           <Nav.Item>
             <NavLink to="/signup">
-              <Button variant="outline-dark" className="m-2">
+              <Button variant="outline-dark" className="m-2 ">
                 <i className="fa-solid fa-user-plus"></i> Sign-Up
               </Button>
             </NavLink>
@@ -70,7 +70,7 @@ function NavOnAuthectication() {
 
           <Nav.Item>
             <NavLink to="/login">
-              <Button variant="dark" className="m-2">
+              <Button variant="dark" className="m-2 ps-4 pe-4 ">
                 <i className="fa-regular fa-user"></i> Login
               </Button>
             </NavLink>
