@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 
 function WishlistCard({ id, image, title, price, rating, quantity, product }) {
   const { wishlistRemoveItem, addItem } = useContext(GlobalContext);

@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Badge from "react-bootstrap/Badge";
 import { auth } from "../../firebase";
 import { NavLink } from "react-router-dom";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 
 function NavOnAuthectication() {
   const { CartState, userState } = useContext(GlobalContext);
@@ -23,13 +23,13 @@ function NavOnAuthectication() {
       {userState ? (
         <>
           <Nav.Item className="me-3">
-            <NavLink to="/wishlist" className="cart-icon-link ">
+            <NavLink to="/user/wishlist" className="cart-icon-link ">
               <i className=" cart-icon fa-solid fa-clipboard-list fa-xl"></i>
             </NavLink>
           </Nav.Item>
 
           <Nav.Item className="me-2">
-            <NavLink to="/cart" className="cart-icon-link ">
+            <NavLink to="/user/cart" className="cart-icon-link ">
               <i className="cart-icon fa-solid fa-cart-shopping fa-xl"></i>
               <Badge className="cart-badge" bg="">
                 {cartItems.length}
@@ -45,7 +45,7 @@ function NavOnAuthectication() {
           >
             <NavDropdown.Item>
               <NavLink
-                to="/orderhistory"
+                to="/user/orderhistory"
                 className="text-decoration-none"
                 style={{ color: "inherit" }}
               >

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import Cards from "./Cards";
+import Cards from "../components/Home/Cards";
 import { GlobalContext } from "../context/Context";
 import { getDocs, collection, query, orderBy } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 // import axios from "axios";
 // import Button from "react-bootstrap/esm/Button";
 

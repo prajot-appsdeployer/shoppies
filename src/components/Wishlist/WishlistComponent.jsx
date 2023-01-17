@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Scrollbars from "react-custom-scrollbars-2";
 import { NavLink } from "react-router-dom";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 import WishlistSVG from "./Wishlist.svg";
 import WishlistCard from "./WishlistCard";
 

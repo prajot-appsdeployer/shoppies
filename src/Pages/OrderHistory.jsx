@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
-import OrderHistoryDetails from "./OrderHistoryDetails";
+import { db } from "../firebase";
+import OrderHistoryDetails from "../components/User/OrderHistoryDetails";
 import { GlobalContext } from "../context/Context";
 
 function OrderHistory() {

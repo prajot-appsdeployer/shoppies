@@ -1,5 +1,5 @@
 import React from "react";
-import WishlistComponent from "./WishlistComponent";
+import WishlistComponent from "../components/Wishlist/WishlistComponent";
 
 function Wishlist() {
   return <WishlistComponent />;

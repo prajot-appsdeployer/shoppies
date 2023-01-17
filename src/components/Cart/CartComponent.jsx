@@ -4,7 +4,7 @@ import CartCard from "./CartCard";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import FillCardDetails from "./FillCardDetails";
 import Button from "react-bootstrap/esm/Button";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 import EmptyCartSVG from "./EmptyCart.svg";
 
 function CartComponent() {

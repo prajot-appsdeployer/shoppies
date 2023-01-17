@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 import { db } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 

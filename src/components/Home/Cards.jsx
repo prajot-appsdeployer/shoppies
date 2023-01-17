@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 
 function Cards({ id, image, title, price, rating, category, product }) {
   const {

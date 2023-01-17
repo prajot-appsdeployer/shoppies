@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import { GlobalContext } from "../context/Context";
+import { GlobalContext } from "../../context/Context";
 
 function CartCard({ id, image, title, price, rating, quantity, product }) {
   const { removeItem, increaseQuantity, decreaseQuantity } =
