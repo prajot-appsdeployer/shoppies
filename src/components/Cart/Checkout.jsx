@@ -4,10 +4,11 @@ import Button from "react-bootstrap/esm/Button";
 import { GlobalContext } from "../../context/Context";
 import { db } from "../../firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
-function FillCardDetails(props) {
-  const { CartState, userState } = useContext(GlobalContext);
-  const cartItems = CartState.state;
+function Checkout(props) {
+  const { userState } = useContext(GlobalContext);
+  const { cartItems } = useSelector((state) => state.cart);
 
   // eslint-disable-next-line
   const [cvv, setCVV] = useState("");
@@ -29,7 +30,7 @@ function FillCardDetails(props) {
 
   const cartDetails = {
     totalItems: cartItems.length,
-    totalAmount: props.totalAmout,
+    totalAmount: props.totalAmount,
     purchasedItems: cartItems,
   };
 
@@ -137,4 +138,4 @@ function FillCardDetails(props) {
   );
 }
 
-export default FillCardDetails;
+export default Checkout;

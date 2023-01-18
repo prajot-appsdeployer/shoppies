@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
-import { GlobalContext } from "../../context/Context";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../features/CartSlice";
+import { wishlistRemoveItem } from "../../features/Wishlist";
 
-function WishlistCard({ id, image, title, price, rating, quantity, product }) {
-  const { wishlistRemoveItem, addItem } = useContext(GlobalContext);
+function WishlistCard({ id, image, title, price, rating, product }) {
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -27,7 +29,7 @@ function WishlistCard({ id, image, title, price, rating, quantity, product }) {
               <div className=" mt-4 d-flex justify-items-center gap-3">
                 <Button
                   variant="outline-danger "
-                  onClick={() => wishlistRemoveItem(product)}
+                  onClick={() => dispatch(wishlistRemoveItem(product))}
                 >
                   Remove from Wishlist
                 </Button>
@@ -35,8 +37,8 @@ function WishlistCard({ id, image, title, price, rating, quantity, product }) {
                 <Button
                   variant="primary "
                   onClick={() => {
-                    addItem(product);
-                    wishlistRemoveItem(product);
+                    dispatch(addItem(product));
+                    dispatch(wishlistRemoveItem(product));
                   }}
                 >
                   Add to cart

@@ -3,16 +3,13 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { GlobalContext } from "../../context/Context";
+import { useDispatch } from "react-redux";
+import { addItem, removeItem } from "../../features/CartSlice";
+import { wishlistAddItem, wishlistRemoveItem } from "../../features/Wishlist";
 
 function Cards({ id, image, title, price, rating, category, product }) {
-  const {
-    userState,
-    addItem,
-    removeItem,
-    wishlistAddItem,
-    wishlistRemoveItem,
-  } = useContext(GlobalContext);
-
+  const { userState } = useContext(GlobalContext);
+  const dispatch = useDispatch();
   const [isClicked, setIsClicked] = useState(false);
   const [isWishlistClicked, setIsWishlistClicked] = useState(false);
 
@@ -38,7 +35,7 @@ function Cards({ id, image, title, price, rating, category, product }) {
                   variant="outline-danger "
                   className="mb-2"
                   onClick={() => {
-                    wishlistRemoveItem(product);
+                    dispatch(wishlistRemoveItem(product));
                     setIsWishlistClicked(!isWishlistClicked);
                   }}
                 >
@@ -48,7 +45,7 @@ function Cards({ id, image, title, price, rating, category, product }) {
                 <Button
                   variant="outline-primary mb-2"
                   onClick={() => {
-                    wishlistAddItem(product);
+                    dispatch(wishlistAddItem(product));
                     setIsWishlistClicked(!isWishlistClicked);
                   }}
                 >
@@ -60,7 +57,7 @@ function Cards({ id, image, title, price, rating, category, product }) {
                 <Button
                   variant="danger "
                   onClick={() => {
-                    removeItem(product);
+                    dispatch(removeItem(product));
                     setIsClicked(!isClicked);
                   }}
                 >
@@ -70,7 +67,7 @@ function Cards({ id, image, title, price, rating, category, product }) {
                 <Button
                   variant="primary "
                   onClick={() => {
-                    addItem(product);
+                    dispatch(addItem(product));
                     setIsClicked(!isClicked);
                   }}
                 >

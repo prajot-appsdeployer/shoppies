@@ -7,10 +7,11 @@ import Badge from "react-bootstrap/Badge";
 import { auth } from "../../firebase";
 import { NavLink } from "react-router-dom";
 import { GlobalContext } from "../../context/Context";
+import { useSelector } from "react-redux";
 
 function NavOnAuthectication() {
-  const { CartState, userState } = useContext(GlobalContext);
-  const cartItems = CartState.state;
+  const { userState } = useContext(GlobalContext);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const userSignOut = () => {
     signOut(auth).then(() => {

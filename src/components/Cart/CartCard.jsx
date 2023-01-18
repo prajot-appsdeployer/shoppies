@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import { GlobalContext } from "../../context/Context";
+import { useDispatch } from "react-redux";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeItem,
+} from "../../features/CartSlice";
 
 function CartCard({ id, image, title, price, rating, quantity, product }) {
-  const { removeItem, increaseQuantity, decreaseQuantity } =
-    useContext(GlobalContext);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -32,9 +36,9 @@ function CartCard({ id, image, title, price, rating, quantity, product }) {
                     variant=""
                     onClick={() => {
                       if (quantity > 1) {
-                        decreaseQuantity(product);
+                        dispatch(decreaseQuantity(product));
                       } else {
-                        removeItem(product);
+                        dispatch(removeItem(product));
                       }
                     }}
                   >
@@ -55,7 +59,7 @@ function CartCard({ id, image, title, price, rating, quantity, product }) {
                   <Button
                     variant=""
                     onClick={() => {
-                      increaseQuantity(product);
+                      dispatch(increaseQuantity(product));
                     }}
                   >
                     <i className="fa-solid fa-plus "></i>
@@ -64,7 +68,7 @@ function CartCard({ id, image, title, price, rating, quantity, product }) {
 
                 <Button
                   variant="outline-danger "
-                  onClick={() => removeItem(product)}
+                  onClick={() => dispatch(removeItem(product))}
                 >
                   Remove
                 </Button>

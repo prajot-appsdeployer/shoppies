@@ -1,19 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import CartCard from "./CartCard";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import FillCardDetails from "./Checkout";
+import Checkout from "./Checkout";
 import Button from "react-bootstrap/esm/Button";
-import { GlobalContext } from "../../context/Context";
+
 import EmptyCartSVG from "./EmptyCart.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../features/CartSlice";
 
 function CartComponent() {
-  const { CartState, clearCart } = useContext(GlobalContext);
-  const cartItems = CartState.state;
+  const { cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-  const totalAmout = cartItems.reduce((total, product) => {
-    return total + product.price * product.quantity;
-  }, 0);
+  const totalAmount = cartItems
+    .reduce((total, product) => {
+      return total + product.price * product.quantity;
+    }, 0)
+    .toFixed(2);
 
   if (cartItems.length === 0) {
     return (
@@ -84,13 +88,13 @@ function CartComponent() {
 
               <div className="mt-2 ">
                 <p>
-                  <span className="fs-3">${totalAmout.toFixed(2)}</span>
+                  <span className="fs-3">${totalAmount}</span>
                 </p>
 
                 <Button
                   variant="danger me-2"
                   type="submit"
-                  onClick={() => clearCart()}
+                  onClick={() => dispatch(clearCart())}
                 >
                   Clear cart
                 </Button>
@@ -98,7 +102,7 @@ function CartComponent() {
             </div>
           </div>
 
-          <FillCardDetails cartItems={cartItems} totalAmout={totalAmout} />
+          <Checkout totalAmount={totalAmount} />
         </div>
       </div>
     </>

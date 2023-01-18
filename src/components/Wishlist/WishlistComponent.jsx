@@ -1,14 +1,32 @@
+import { doc, setDoc } from "firebase/firestore";
 import React, { useContext } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Scrollbars from "react-custom-scrollbars-2";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { GlobalContext } from "../../context/Context";
+import { clearWishlist } from "../../features/Wishlist";
+import { db } from "../../firebase";
 import WishlistSVG from "./Wishlist.svg";
 import WishlistCard from "./WishlistCard";
 
 function WishlistComponent() {
-  const { CartState, clearWishlist, addAllToCart } = useContext(GlobalContext);
-  const wishlistItems = CartState.state1;
+  const { userState } = useContext(GlobalContext);
+  const { wishlistItems } = useSelector((state) => state.wishlist);
+  const dispatch = useDispatch();
+
+  const saveWishlist = () => {
+    wishlistItems.forEach((item) => {
+      const productData = doc(
+        db,
+        "usersdetails/",
+        userState.uid,
+        "/wishlistedItems",
+        "" + item.id
+      );
+      setDoc(productData, item).catch((err) => console.error(err.message));
+    });
+  };
 
   if (wishlistItems.length === 0) {
     return (
@@ -75,20 +93,28 @@ function WishlistComponent() {
                 <Button
                   variant="danger me-2"
                   type="submit"
-                  onClick={() => clearWishlist()}
+                  onClick={() => dispatch(clearWishlist())}
                 >
                   Clear wishlist
                 </Button>
 
-                <Button
+                {/* <Button
                   variant="primary"
                   type="submit"
                   onClick={() => {
-                    addAllToCart(wishlistItems);
-                    clearWishlist();
+                    dispatch(addAllToCart(wishlistItems));
+                    dispatch(clearWishlist());
                   }}
                 >
                   Add all to cart
+                </Button> */}
+
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={() => saveWishlist()}
+                >
+                  Save Wishlist
                 </Button>
               </div>
             </div>

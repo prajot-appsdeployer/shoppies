@@ -4,5 +4,6 @@ import { GlobalContext } from "../context/Context";
 
 export const PrivateRoute = () => {
   const { userState } = useContext(GlobalContext);
+
   return userState ? <Outlet /> : <Navigate to="/login" />;
 };

@@ -22,6 +22,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
 
         {/* Private routes to show only when the user is logged in */}
+
         <Route path="/" element={<PrivateRoute />}>
           <Route path="cart" element={<Cart />} />
           <Route path="wishlist" element={<Wishlist />} />
