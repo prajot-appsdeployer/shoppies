@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../features/CartSlice";
-import { wishlistRemoveItem } from "../../features/Wishlist";
+import { wishlistRemoveItem } from "../../features/WishlistSlice";
 
 function WishlistCard({ id, image, title, price, rating, product }) {
   const dispatch = useDispatch();

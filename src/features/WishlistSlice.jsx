@@ -29,10 +29,26 @@ export const wishlistSlice = createSlice({
     clearWishlist: (state) => {
       state.wishlistItems = [];
     },
+
+    firestoreToWishlist: (state, action) => {
+      action.payload.forEach((element) => {
+        const checkArr = state.wishlistItems.filter(
+          (item) => element.id === item.id
+        );
+
+        if (checkArr.length === 0) {
+          state.wishlistItems = state.wishlistItems.concat(action.payload);
+        }
+      });
+    },
   },
 });
 
-export const { wishlistAddItem, wishlistRemoveItem, clearWishlist } =
-  wishlistSlice.actions;
+export const {
+  wishlistAddItem,
+  wishlistRemoveItem,
+  clearWishlist,
+  firestoreToWishlist,
+} = wishlistSlice.actions;
 
 export default wishlistSlice.reducer;

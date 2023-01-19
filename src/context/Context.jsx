@@ -7,6 +7,7 @@ export const GlobalContext = createContext();
 export const Context = (props) => {
   // User Login state
   const [userState, setUserState] = useState(null);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

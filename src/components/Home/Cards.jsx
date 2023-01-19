@@ -5,7 +5,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { GlobalContext } from "../../context/Context";
 import { useDispatch } from "react-redux";
 import { addItem, removeItem } from "../../features/CartSlice";
-import { wishlistAddItem, wishlistRemoveItem } from "../../features/Wishlist";
+import {
+  wishlistAddItem,
+  wishlistRemoveItem,
+} from "../../features/WishlistSlice";
 
 function Cards({ id, image, title, price, rating, category, product }) {
   const { userState } = useContext(GlobalContext);
