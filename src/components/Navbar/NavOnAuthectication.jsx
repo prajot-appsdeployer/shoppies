@@ -39,7 +39,7 @@ function NavOnAuthectication() {
           </Nav.Item>
 
           <NavDropdown
-            title={userState.displayName}
+            title={userState.email}
             drop="down-centered"
             align="end"
             id="dropdown-button-drop-down-centered"
