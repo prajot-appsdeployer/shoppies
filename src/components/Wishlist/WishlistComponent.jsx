@@ -1,12 +1,13 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDocs,
   orderBy,
   query,
   setDoc,
 } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Scrollbars from "react-custom-scrollbars-2";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,6 @@ import {
   firestoreToWishlist,
 } from "../../features/WishlistSlice";
 import { db } from "../../firebase";
-
 import WishlistSVG from "./Wishlist.svg";
 import WishlistCard from "./WishlistCard";
 
@@ -51,6 +51,20 @@ function WishlistComponent() {
       list.push(doc.data());
     });
     dispatch(firestoreToWishlist(list));
+  };
+
+  const deleteWishlist = () => {
+    wishlistItems.forEach((item) => {
+      deleteDoc(
+        doc(
+          db,
+          "usersdetails/",
+          userState.uid,
+          "/wishlistedItems",
+          "" + item.id
+        )
+      );
+    });
   };
 
   useEffect(() => {
@@ -119,9 +133,12 @@ function WishlistComponent() {
                     <Button
                       variant="danger me-2"
                       type="submit"
-                      onClick={() => dispatch(clearWishlist())}
+                      onClick={() => {
+                        dispatch(clearWishlist());
+                        deleteWishlist();
+                      }}
                     >
-                      Clear wishlist
+                      Delete wishlist
                     </Button>
 
                     {/* <Button
