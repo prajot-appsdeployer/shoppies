@@ -69,6 +69,7 @@ function WishlistComponent() {
 
   useEffect(() => {
     wishlistData();
+    // eslint-disable-next-line
   }, []);
 
   return (
